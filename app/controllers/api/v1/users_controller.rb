@@ -36,7 +36,7 @@ module Api
              @user = User.find(params[:id])
              @user.delete
 
-             render status: :created
+             render status: :deleted
            end
 
           private
