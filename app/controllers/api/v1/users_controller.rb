@@ -5,9 +5,23 @@ module Api
         class UsersController < ApplicationController
 
           def index
-            @users = User.all
 
-            render json: @users
+             users = User.page(params[:page]).per(5)
+
+              render json: users,
+                     meta: {
+                       pagination: {
+                         per_page: 5,
+                         total_pages: 10,
+                         total_objects: 150
+                       }
+                     }
+            # @users = User.page(params[:page])
+
+            # paginate json: @users, per_page: 5
+
+
+            # render json: @users
           end
 
            def show
