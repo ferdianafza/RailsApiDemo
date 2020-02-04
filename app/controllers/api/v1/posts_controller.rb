@@ -37,9 +37,20 @@ module Api
 
 
        def index
-      @posts = Post.order('created_at DESC')
 
-      render json: @posts
+        posts = Post.page(params[:page]).per(5)
+
+            render json: posts,
+                   meta: {
+                     pagination: {
+                       per_page: 5,
+                       total_pages: 10,
+                       total_objects: 150
+                     }
+                   }
+      # @posts = Post.order('created_at DESC')
+
+      # render json: @posts
       end
 
       private

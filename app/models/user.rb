@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
+  has_one_attached :avatar
+
   before_create -> {self.token = (generate_token)}
 
   private
